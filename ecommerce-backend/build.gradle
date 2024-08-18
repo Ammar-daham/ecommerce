@@ -22,12 +22,13 @@ dependencies {
 
 // For Eclipse IDE only
 eclipse {
-	wtp {
-		component {
-			contextPath = 'abc'
-		}
-	}
+    wtp {
+        component {
+            contextPath = 'sliceshop'  // Set the context path to 'sliceshop'
+        }
+    }
 }
+
 
 // Apply the WAR plugin
 war {
