@@ -21,11 +21,47 @@ public class SliceShopServlet extends HttpServlet
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException
 	{
-		response.setContentType("text/html");
-		response.setBufferSize(8192);
-		response.getWriter().println("<html><body><h1>Hello, World!</h1></body></html>");
-		System.out.println("hello world");
+		
+		
+		String method = "";
+		String response = null;
+		int responseCode = HttpServletResponse.SC_OK;
+		
+		try {
+			method = getMethod(req.getRequestURI());
+			
+			switch(method) {
+				case "products":
+				{
+					res.setContentType("text/html");
+					res.setBufferSize(8192);
+					res.getWriter().println("<html><body><h1>products!</h1></body></html>");
+					System.out.println("hello world");
+				}
+				case "users":
+				{
+					res.setContentType("text/html");
+					res.setBufferSize(8192);
+					res.getWriter().println("<html><body><h1>users!</h1></body></html>");
+					System.out.println("hello world");
+				}
+			}
+		}
+		 catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	private String getMethod(String requestURI)
+	{
+		
+		String[] parts = requestURI.split("/");
+		if (parts.length > 2)
+		{
+			return parts[2];
+		}
+		return "";
 	}
 }
