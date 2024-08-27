@@ -1,0 +1,61 @@
+plugins {
+	id 'java'
+	id 'eclipse-wtp'
+	id 'war'  // Required to package the application as a WAR file
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    // Other dependencies...
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    
+    // Or use the Jakarta Persistence API for more recent versions:
+    // implementation 'jakarta.persistence:jakarta.persistence-api:2.2.3'
+
+    // Tomcat9 supported Servlet API version
+    implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
+    // Hibernate and other database-related dependencies
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.15.Final'
+    implementation group: 'org.hibernate', name: 'hibernate-c3p0', version: '5.6.15.Final'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    
+   	// JSON serializing
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+}
+
+// For Eclipse IDE only
+eclipse {
+    wtp {
+        component {
+            resource sourcePath: 'src/test/resources', deployPath: 'WEB-INF/classes'
+        }
+    }
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}
+	}
+	
+	test {
+		java {
+			srcDirs = ['src/test/java']
+		}
+	}
+}
+
+
